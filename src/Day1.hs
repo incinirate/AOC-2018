@@ -4,8 +4,7 @@ import qualified Data.Set as Set
 import Util
 
 stripPlus :: String -> String
-stripPlus ('+':xs) = xs
-stripPlus xs = xs
+stripPlus = filter (/= '+')
 
 firstDup :: Ord a => [a] -> Maybe a
 firstDup xs = findDup xs Set.empty
