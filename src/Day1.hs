@@ -3,13 +3,9 @@ import qualified Data.Set as Set
 
 import Util
 
-canonicalizeSign :: String -> String
-canonicalizeSign ('+':xs) = xs
-canonicalizeSign xs = xs
-
-getInput :: [String] -> String
-getInput (fn:_) = fn
-getInput xs = "Day1.txt"
+stripPlus :: String -> String
+stripPlus ('+':xs) = xs
+stripPlus xs = xs
 
 firstDup :: Ord a => [a] -> Maybe a
 firstDup xs = findDup xs Set.empty
@@ -20,7 +16,7 @@ firstDup xs = findDup xs Set.empty
 
 main = do
   input <- readInput $ Day 1
-  let nums = read . canonicalizeSign <$> lines input :: [Int]
+  let nums = read . stripPlus <$> lines input :: [Int]
 
   putStrLn $ "Part 1: " ++ (show . sum $ nums)
 
