@@ -12,8 +12,6 @@ score xs =
   Score {has2Letters = 2 `elem` letterCounts, has3Letters = 3 `elem` letterCounts}
   where letters = nub xs
         letterCounts = length . flip filter xs . (==) <$> letters
-        has2Letters = 2 `elem` letterCounts
-        has3Letters = 3 `elem` letterCounts
 
 diff :: Eq a => [a] -> [a] -> [a]
 diff xs ys =
