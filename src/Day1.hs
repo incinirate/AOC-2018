@@ -1,3 +1,5 @@
+module Day1 (run) where
+
 import System.Environment
 import qualified Data.Set as Set
 
@@ -13,7 +15,8 @@ firstDup xs = findDup xs Set.empty
                               then Just x
                               else findDup xs (Set.insert x ys)
 
-main = do
+run :: IO ()
+run = do
   input <- readInput $ Day 1
   let nums = read . stripPlus <$> lines input :: [Int]
 
