@@ -1,7 +1,7 @@
 name:                aoc2018
 version:             0.1.0.0
 homepage:            https://github.com/incinirate/AOC-2018#readme
-license:             Unlicense
+license:             OtherLicense
 license-file:        LICENSE
 author:              Bryan Becar (Incin)
 maintainer:          dogescript@gmail.com

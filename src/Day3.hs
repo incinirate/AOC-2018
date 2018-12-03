@@ -5,7 +5,7 @@ import Data.Array.ST (runSTArray)
 import Data.Array (Array, (!))
 
 import Data.List.Extra (nubOrd, find)
-import Control.Monad (forM_)
+import Control.Monad (forM_, when)
 
 import Util
 
@@ -28,12 +28,16 @@ claimAreas (x1, y1, x2, y2, _) = [(x, y) | x <- [x1..x2], y <- [y1..y2]]
 
 fill :: [Claim] -> Array (Int, Int) Int
 fill claims = runSTArray $ do
-  arr <- MArray.newArray ((0, 0), (1000, 1000)) 0
+  arr <- MArray.newArray ((0, 0), (1000, 1001)) 0
 
   let areas = concat (claimAreas <$> claims)
   nVals <- forM_ areas 
     (\index -> do
       nVal <- MArray.readArray arr index
+      
+      curCount <- MArray.readArray arr (0, 1001)
+      when (nVal == 1) $ MArray.writeArray arr (0, 1001) (curCount + 1)
+
       MArray.writeArray arr index (nVal + 1))
 
   return arr
@@ -47,8 +51,7 @@ run = do
   let claims = parse <$> lines input
 
   let arr = fill claims
-  let areas = nubOrd (concat (claimAreas <$> claims))
-  let cnt = length . filter (> 1) $ (arr!) <$> areas
+  let cnt = arr ! (0, 1001)
   putStrLn $ "Part 1: " ++ show cnt ++ "in^2"
 
   let Just (_, _, _, _, ownID) = find (ownArea arr) claims
