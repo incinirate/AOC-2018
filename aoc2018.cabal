@@ -1,14 +1,12 @@
-name:                aoc
+name:                aoc2018
 version:             0.1.0.0
--- synopsis:
--- description:
-homepage:            https://github.com/githubuser/aoc#readme
-license:             BSD3
+homepage:            https://github.com/incinirate/AOC-2018#readme
+license:             Unlicense
 license-file:        LICENSE
-author:              Author name here
-maintainer:          example@example.com
-copyright:           2018 Author name here
-category:            Web
+author:              Bryan Becar (Incin)
+maintainer:          dogescript@gmail.com
+copyright:           2018 Bryan Becar
+
 build-type:          Simple
 cabal-version:       >=1.10
 extra-source-files:  README.md
