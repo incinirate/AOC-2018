@@ -28,7 +28,7 @@ run = do
       twos = length (filter has2Letters scores)
       threes = length (filter has3Letters scores)
 
-  putStrLn $ "Checksum: " ++ show (twos * threes)
+  putStrLn $ "Part 1: " ++ show (twos * threes)
 
   let commonChars = head [diff xs ys | xs <- ids, ys <- ids, length (diff xs ys) + 1 == length xs]
-  putStrLn $ "Differing Letters: " ++ commonChars
+  putStrLn $ "Part 2: " ++ commonChars

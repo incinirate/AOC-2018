@@ -21,3 +21,5 @@ executable aoc
                        extra,
                        array,
                        containers
+  other-modules:
+    Util, Day1, Day2, Day3
