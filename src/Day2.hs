@@ -1,4 +1,5 @@
-import Data.List (nub, intersect)
+import Data.List (nub)
+import Data.Maybe
 import Util
 
 data Score = Score { has2Letters :: Bool
@@ -14,9 +15,8 @@ score xs =
 
 diff :: Eq a => [a] -> [a] -> [a]
 diff xs ys =
-  unJust <$> filter (/= Nothing) (zipWith test xs ys)
+  fromJust <$> filter (/= Nothing) (zipWith test xs ys)
   where test a b = if a == b then Just a else Nothing
-        unJust (Just a) = a
 
 main = do
   input <- readInput $ Day 2
