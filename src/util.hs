@@ -27,6 +27,4 @@ nonNumberParser :: Parser String
 nonNumberParser = many1 (noneOf "0123456789")
 
 extractNumListParser :: Parser [TNumber]
-extractNumListParser = do
-  optional $ skipMany1 nonNumberParser
-  numberParser `sepBy` nonNumberParser
+extractNumListParser = optional (skipMany1 nonNumberParser) *> (numberParser `sepBy` nonNumberParser)
