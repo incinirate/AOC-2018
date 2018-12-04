@@ -35,11 +35,10 @@ dateParser :: Parser DateAndTime
 dateParser = listToDateTime <$> between (char '[') (char ']') numListParser
 
 actionParser :: Parser Event
-actionParser = Event <$> dateParser <*> do
-  spaces
-  const  FellAsleep <$> try (reservedParser "falls asleep")
-   <|> const WokeUp <$> try (reservedParser "wakes up")
-   <|>  SwitchShift <$> try (reservedParser "Guard #" *> numberParser)
+actionParser = Event <$> dateParser <*> (spaces *>
+      ((FellAsleep  <$  try (reservedParser "falls asleep"))
+   <|> (WokeUp      <$  try (reservedParser "wakes up"))
+   <|>  SwitchShift <$> try (reservedParser "Guard #" *> numberParser)))
 
 -- Action collection and manipulation functions
 incr :: (Num v, Ord k) => k -> M.Map k v -> M.Map k v
