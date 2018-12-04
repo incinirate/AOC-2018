@@ -26,5 +26,11 @@ numberParser = read <$> many digit
 nonNumberParser :: Parser String
 nonNumberParser = many1 (noneOf "0123456789")
 
-extractNumListParser :: Parser [TNumber]
-extractNumListParser = optional (skipMany1 nonNumberParser) *> (numberParser `sepBy` nonNumberParser)
+extractOnlyNumListParser :: Parser [TNumber]
+extractOnlyNumListParser = optional (skipMany1 nonNumberParser) *> (numberParser `sepBy` nonNumberParser)
+
+reservedParser :: String -> Parser String
+reservedParser name = do {walk name; return name}
+  where walk :: String -> Parser ()
+        walk [] = return ()
+        walk (x:xs) = do {char x; walk xs}
