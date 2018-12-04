@@ -21,7 +21,7 @@ parseStr xs p = parse p "" xs
 
 type TNumber = Int
 numberParser :: Parser TNumber
-numberParser = read <$> many (oneOf "0123456789")
+numberParser = read <$> many digit
 
 nonNumberParser :: Parser String
 nonNumberParser = many1 (noneOf "0123456789")
