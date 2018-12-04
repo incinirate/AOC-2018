@@ -11,17 +11,9 @@ import Util
 
 type Claim = (Int, Int, Int, Int, Int)
 
-getNums :: String -> [String]
-getNums "" = []
-getNums xs
-  = nums : getNums (deletePred notNums)
-  where isNum = (`elem` "0123456789")
-        deletePred = dropWhile (not . isNum)
-        (nums, notNums) = span isNum (deletePred xs)
-
-parse :: String -> Claim
-parse xs = (a, b, a + c - 1, b + d - 1, id)
-  where [id, a,b,c,d] = read <$> getNums xs :: [Int]
+parseClaim :: String -> Claim
+parseClaim xs = (a, b, a + c - 1, b + d - 1, id)
+  where Right [id, a,b,c,d] = parseStr xs extractNumListParser
 
 claimAreas :: Claim -> [(Int, Int)]
 claimAreas (x1, y1, x2, y2, _) = [(x, y) | x <- [x1..x2], y <- [y1..y2]]
@@ -48,7 +40,7 @@ ownArea arr claim = and ((== 1) . (arr !) <$> claimAreas claim)
 run :: IO ()
 run = do
   input <- readInput $ Day 3
-  let claims = parse <$> lines input
+  let claims = parseClaim <$> lines input
 
   let arr = fill claims
   let cnt = arr ! (0, 1001)
