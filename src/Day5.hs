@@ -1,16 +1,8 @@
 module Day5 (run) where
 
-import qualified Data.Map as M
 import Data.List (foldl')
 
 import Util
-
-charDown :: Char -> Char
-charDown c = ret $ cm M.!? c
-  where cm = foldr (\ (k, v) acc -> M.insert k v acc) M.empty lSet
-        lSet = zip ['A'..'Z'] ['a'..'z']
-        ret (Just v) = v
-        ret Nothing = c
 
 react :: String -> String
 react xs = foldl' (\acc x -> 

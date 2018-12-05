@@ -5,6 +5,8 @@ module Util where
 import Text.Parsec
 import System.Environment
 
+import qualified Data.Map as M
+
 newtype Day n = Day n
 
 readInput :: Show a => Day a -> IO String
@@ -13,6 +15,7 @@ readInput (Day day) = readFile =<< fileName
         fileName = getArgs >>= (\case
           [_, fn] -> return fn
           _       -> return ("Day" ++ show day ++ ".txt"))
+
 
 type Parser = Parsec String ()
 
@@ -32,5 +35,14 @@ extractOnlyNumListParser = optional (skipMany1 nonNumberParser) *> (numberParser
 reservedParser :: String -> Parser String
 reservedParser name = do {walk name; return name}
   where walk :: String -> Parser ()
-        walk [] = return ()
-        walk (x:xs) = do {char x; walk xs}
+        walk = foldr ((*>) . char) (return ())
+
+
+charMap :: [(Char, Char)] -> Char -> Char
+charMap lSet c = ret $ cm M.!? c
+  where cm = foldr (\ (k, v) acc -> M.insert k v acc) M.empty lSet
+        ret (Just v) = v
+        ret Nothing = c
+
+charDown :: Char -> Char
+charDown = charMap (zip ['A'..'Z'] ['a'..'z'])
