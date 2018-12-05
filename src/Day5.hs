@@ -8,7 +8,7 @@ import Util
 charDown :: Char -> Char
 charDown c = ret $ cm M.!? c
   where cm = foldr (\ (k, v) acc -> M.insert k v acc) M.empty lSet
-        lSet = zip "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz"
+        lSet = zip ['A'..'Z'] ['a'..'z']
         ret (Just v) = v
         ret Nothing = c
 
