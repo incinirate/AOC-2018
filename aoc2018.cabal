@@ -21,4 +21,4 @@ executable aoc
                        containers,
                        parsec
   other-modules:
-    Util, Day1, Day2, Day3, Day4, Day5
+    Util, Day1, Day2, Day3, Day4, Day5, Day6

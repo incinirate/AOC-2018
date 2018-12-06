@@ -16,6 +16,9 @@ readInput (Day day) = readFile =<< fileName
           [_, fn] -> return fn
           _       -> return ("Day" ++ show day ++ ".txt"))
 
+fromRight :: Either a b -> b
+fromRight (Right x) = x
+
 
 type Parser = Parsec String ()
 
