@@ -15,7 +15,7 @@ nodeParser :: Parser Tree
 nodeParser = do
   childCnt <- numberParser;              spaces
   metaCnt  <- numberParser;              spaces
-  children <- count childCnt nodeParser;  spaces
+  children <- count childCnt nodeParser; spaces
   meta <- count metaCnt (numberParser <* spaces)
   return (Node children meta)
 
