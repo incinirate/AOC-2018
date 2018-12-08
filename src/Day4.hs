@@ -66,7 +66,7 @@ maxVal m = maximumBy (\ (_, a) (_, b) -> a `compare` b) (M.toList m)
 run :: IO ()
 run = do
   input <- readInput $ Day 4
-  let events = sort (fromRight . flip parseStr actionParser <$> lines input)
+  let events = sort (fromRight . parseStr actionParser <$> lines input)
 
   let totals = countAssociative events
   let afterSleep = countFlat events

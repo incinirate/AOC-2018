@@ -14,7 +14,7 @@ parsePoint :: Parser Point
 parsePoint = (\ [x, y] -> Point { getX = x, getY = y }) <$> extractOnlyNumListParser
 
 getPoints :: String -> [Point]
-getPoints xs = fromRight . (`parseStr` parsePoint) <$> lines xs
+getPoints xs = fromRight . parseStr parsePoint <$> lines xs
 
 
 type Box = (Point, Point)

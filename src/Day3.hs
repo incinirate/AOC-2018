@@ -13,7 +13,7 @@ type Claim = (Int, Int, Int, Int, Int)
 
 parseClaim :: String -> Claim
 parseClaim xs = (a, b, a + c - 1, b + d - 1, id)
-  where Right [id, a,b,c,d] = parseStr xs extractOnlyNumListParser
+  where Right [id, a,b,c,d] = parseStr extractOnlyNumListParser xs
 
 claimAreas :: Claim -> [(Int, Int)]
 claimAreas (x1, y1, x2, y2, _) = [(x, y) | x <- [x1..x2], y <- [y1..y2]]

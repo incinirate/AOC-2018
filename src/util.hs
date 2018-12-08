@@ -22,8 +22,8 @@ fromRight (Right x) = x
 
 type Parser = Parsec String ()
 
-parseStr :: String -> Parser a -> Either ParseError a
-parseStr xs p = parse p "" xs
+parseStr :: Parser a -> String -> Either ParseError a
+parseStr p = parse p ""
 
 type TNumber = Int
 numberParser :: Parser TNumber
@@ -49,3 +49,17 @@ charMap lSet c = ret $ cm M.!? c
 
 charDown :: Char -> Char
 charDown = charMap (zip ['A'..'Z'] ['a'..'z'])
+
+
+applyOn :: (a -> b) -> (b -> b -> c) -> a -> a -> c
+applyOn fstFn sndFn a b = sndFn (fstFn a) (fstFn b)
+
+eqOn :: Eq b => (a -> b) -> a -> a -> Bool
+eqOn fn = applyOn fn (==)
+
+compareOn :: Ord b => (a -> b) -> a -> a -> Ordering
+compareOn fn = applyOn fn compare
+
+
+pullToPair :: (a -> b) -> a -> (b, a)
+pullToPair fn x = (fn x, x)
