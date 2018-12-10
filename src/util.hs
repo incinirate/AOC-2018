@@ -3,6 +3,7 @@
 module Util where
 
 import Text.Parsec
+import qualified Text.Parsec.Number as NumParsers
 import System.Environment
 
 import qualified Data.Map as M
@@ -27,7 +28,7 @@ parseStr p = parse p ""
 
 type TNumber = Int
 numberParser :: Parser TNumber
-numberParser = read <$> many digit
+numberParser = NumParsers.int
 
 nonNumberParser :: Parser String
 nonNumberParser = many1 (noneOf "0123456789")
