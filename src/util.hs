@@ -20,6 +20,9 @@ readInput (Day day) = readFile =<< fileName
 fromRight :: Either a b -> b
 fromRight (Right x) = x
 
+fromMaybeBool :: Maybe Bool -> Bool
+fromMaybeBool (Just a) = a
+fromMaybeBool Nothing = False
 
 type Parser = Parsec String ()
 

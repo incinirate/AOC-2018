@@ -13,6 +13,7 @@ import qualified Day8
 import qualified Day9
 import qualified Day10
 import qualified Day11
+import qualified Day12
 
 runDay :: [String] -> IO ()
 runDay xs
@@ -29,6 +30,7 @@ runDay xs
     "9" -> Day9.run
     "10" -> Day10.run
     "11" -> Day11.run
+    "12" -> Day12.run
     ___ -> fail $ "Invalid day '" ++ day ++ "'"
 
   | otherwise = fail "Syntax: ./aoc <day> [input]"
