@@ -38,7 +38,7 @@ runStep :: IntMap Bool -> IntMap Bool -> IntMap Bool
 runStep ruleMap stateMap = M.fromList (zip range (willGrow <$> range))
   where getSurrounding k = fromMaybeBool <$> ((`M.lookup` stateMap) <$> [k-2..2+k])
         willGrow k = fromMaybeBool $ M.lookup (ruleToKey (getSurrounding k)) ruleMap
-        range = [minimum (M.keys stateMap) - 3 .. maximum (M.keys stateMap) + 3]
+        range = [minimum (M.keys stateMap) - 2 .. maximum (M.keys stateMap) + 2]
 
 run :: IO ()
 run = do
